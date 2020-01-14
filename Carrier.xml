@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<carriers>
+<carrier>
+    <id>1</id>
+    <name>vasa</name>
+    <address>Toronto</address>
+    <carrierType>SHIP</carrierType>
+</carrier>
+<carrier>
+    <id>2</id>
+    <name>bolt</name>
+    <address>Moscow</address>
+    <carrierType>PLANE</carrierType>
+</carrier>
+</carriers>

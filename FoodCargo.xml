@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<foodcargo>
+<cargo>
+    <id>1</id>
+    <name>banana</name>
+    <weight>200</weight>
+    <expirationDate>22.10.2020</expirationDate>
+    <storeTemperature>15</storeTemperature>
+</cargo>
+<cargo>
+    <id>2</id>
+    <name>apple</name>
+    <weight>100</weight>
+    <expirationDate>22.10.2022</expirationDate>
+    <storeTemperature>12</storeTemperature>
+</cargo>
+<cargo>
+    <id>3</id>
+    <name>narana</name>
+    <weight>300</weight>
+    <expirationDate>22.10.2021</expirationDate>
+    <storeTemperature>23</storeTemperature>
+</cargo>
+</foodcargo>

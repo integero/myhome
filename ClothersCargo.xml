@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<clothersCargo>
+<cargo>
+    <cargoType>CLOTHERS</cargoType>
+    <id>4</id>
+    <name>shirt</name>
+    <weight>25</weight>
+    <size>M</size>
+    <material>cotton</material>
+</cargo>
+<cargo>
+    <cargoType>CLOTHERS</cargoType>
+    <id>5</id>
+    <name>gloves</name>
+    <weight>100</weight>
+    <size>S</size>
+    <material>skeen</material>
+</cargo>
+</clothersCargo>
