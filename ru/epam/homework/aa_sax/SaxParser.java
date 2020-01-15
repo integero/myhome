@@ -19,10 +19,10 @@ public class SaxParser {
     public static void main(String[] args) throws Exception, SAXException {
         SAXParserFactory factory = SAXParserFactory.newInstance();
         SAXParser saxParser = factory.newSAXParser();
+        List<Carrier> carList = parseAndPrint("D:\\IdeaProjects\\dimdim\\src\\Carrier.xml", saxParser, new MyHandlerCarrier());
         List<TransportationEnhanced> trEnhList = parseAndPrint("D:\\IdeaProjects\\dimdim\\src\\CargoTransportation.xml", saxParser, new MyHandlerTransportation());
         List<FoodCargo> foodCList = parseAndPrint("D:\\IdeaProjects\\dimdim\\src\\FoodCargo.xml", saxParser, new MyHandlerFoodCargo());
         List<ClothersCargo> cloCList = parseAndPrint("D:\\IdeaProjects\\dimdim\\src\\ClothersCargo.xml", saxParser, new MyHandlerClothersCargo());
-        List<Carrier> carList = parseAndPrint("D:\\IdeaProjects\\dimdim\\src\\Carrier.xml", saxParser, new MyHandlerCarrier());
         foolExchange(trEnhList, foodCList, cloCList, carList);
         for (int i = 0; i < trEnhList.size(); i++) {
             System.out.println(trEnhList.get(i).getCargo().getId()+"   "+trEnhList.get(i).getCargo().getCargoType());
