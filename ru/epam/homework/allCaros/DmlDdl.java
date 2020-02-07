@@ -27,8 +27,8 @@ public class DmlDdl {
 /*            ps.setLong(1, user.id);
             ps.setString(2, user.name);
  */
-            setToPreparedStatment(ps,user.id,1);
-            setToPreparedStatment(ps,user.name,2);
+            setToPreparedStatment(ps, user.id, 1);
+            setToPreparedStatment(ps, user.name, 2);
             ps.executeUpdate();
 
         } catch (Exception e) {
@@ -44,7 +44,25 @@ public class DmlDdl {
         }
     }
 
-    Object getFieldFromResult(ResultSet reSet, Object field, String fieldName) {
+    private static class User {
+        private long id;
+        private String name;
+
+        public User(long id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return "User{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    '}';
+        }
+    }
+
+    Object getFieldFromResult(ResultSet reSet, Object field, String fieldName) throws SQLException {
         if (field instanceof Long)
             return (Long) reSet.getLong(fieldName);
         if (field instanceof String)
@@ -52,7 +70,7 @@ public class DmlDdl {
         return null;
     }
 
-    private static void setToPreparedStatment(PreparedStatement ps, Object field, int index) {
+    private static void setToPreparedStatment(PreparedStatement ps, Object field, int index) throws SQLException {
         if (field instanceof Long) {
             ps.setLong(index, (Long) field);
         }
