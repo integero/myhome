@@ -1,37 +1,50 @@
 package ru.epam.homework.aa_sax;
 
+import org.xml.sax.SAXException;
 import ru.epam.homework.cargo.domain.ClothersCargo;
 import ru.epam.homework.cargo.domain.FoodCargo;
 import ru.epam.homework.carrier.domain.Carrier;
 import ru.epam.homework.common.business.domain.BaseEntity;
 import ru.epam.homework.transportation.domain.Transportation;
-import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-public class SaxParser {
+public class SaxCommonParser {
+    static File file;
+    SAXParserFactory factory;
+    static SAXParser saxParser;
+
+   public SaxCommonParser() throws ParserConfigurationException, SAXException {
+        factory = SAXParserFactory.newInstance();
+        factory.newSAXParser();
+    }
 
     public static void main(String[] args) throws Exception, SAXException {
         SAXParserFactory factory = SAXParserFactory.newInstance();
         SAXParser saxParser = factory.newSAXParser();
+        file = new File("D:\\IdeaProjects\\myhome\\src\\CommonStorage.xml");
+//        File file = new File("D:\\IdeaProjects\\myhome\\src\\CommonStorage.xml");
+        saxParser.parse(file, new MyStartHandler());
+/*
         List<Carrier> carList = parseAndPrint("D:\\IdeaProjects\\dimdim\\src\\Carrier.xml", saxParser, new MyHandlerCarrier());
         List<TransportationEnhanced> trEnhList = parseAndPrint("D:\\IdeaProjects\\dimdim\\src\\CargoTransportation.xml", saxParser, new MyHandlerTransportation());
         List<FoodCargo> foodCList = parseAndPrint("D:\\IdeaProjects\\dimdim\\src\\FoodCargo.xml", saxParser, new MyHandlerFoodCargo());
         List<ClothersCargo> cloCList = parseAndPrint("D:\\IdeaProjects\\dimdim\\src\\ClothersCargo.xml", saxParser, new MyHandlerClothersCargo());
-        foolExchange(trEnhList, foodCList, cloCList, carList);
-        for (int i = 0; i < trEnhList.size(); i++) {
-            System.out.println(trEnhList.get(i).getCargo().getId() + "   " + trEnhList.get(i).getCargo().getCargoType());
+*/
+//        foolExchange(trEnhList, foodCList, cloCList, carList);
+ /*       for (int i = 0; i < trEnhList.size(); i++) {
+            System.out.println(trEnhList.get(i).getCargo().getId()+"   "+trEnhList.get(i).getCargo().getCargoType());
             System.out.println(trEnhList.get(i).getCargo().getTransportations().toString());
-            System.out.println(trEnhList.get(i).getCarrier().getId() + "   " + trEnhList.get(i).getCarrier().getCarrierType());
+            System.out.println(trEnhList.get(i).getCarrier().getId()+"   "+trEnhList.get(i).getCarrier().getCarrierType());
             System.out.println(trEnhList.get(i).getCarrier().getTransportations().toString());
             System.out.println();
-        }
+        }*/
     }
 
     public static void foolExchange(List<TransportationEnhanced> trEnhList,
@@ -40,42 +53,32 @@ public class SaxParser {
         ClothersCargo cloth = null;
         Carrier carr = null;
 //        List<Transportation> tmpList = new ArrayList<>();
-        for (TransportationEnhanced transportation : trEnhList) {
+        for (TransportationEnhanced tr : trEnhList) {
             long idTmp;
 
-            idTmp = transportation.getCargoId();
-
-            Optional<FoodCargo> foodCargoOptional = Optional.of(getById(foodCList, idTmp));
-            if (foodCargoOptional.isPresent()) {
-                food=foodCargoOptional.get();
-                transportation.setCargo(food);
-                if (food.getTransportations() == null)
-                    food.setTransportations(new ArrayList<Transportation>());
-                food.getTransportations().add(transportation);
-            }
-
+            idTmp = tr.getCargoId();
             food = getById(foodCList, idTmp);
             if (food != null) {
-                transportation.setCargo(food);
+                tr.setCargo(food);
                 if (food.getTransportations() == null)
                     food.setTransportations(new ArrayList<Transportation>());
-                food.getTransportations().add(transportation);
+                food.getTransportations().add(tr);
             } else {
                 cloth = getById(cloCList, idTmp);
                 if (cloth != null) {
-                    transportation.setCargo(cloth);
+                    tr.setCargo(cloth);
                     if (cloth.getTransportations() == null)
                         cloth.setTransportations(new ArrayList<Transportation>());
-                    cloth.getTransportations().add(transportation);
+                    cloth.getTransportations().add(tr);
                 }
             }
-            idTmp = transportation.getCarrierId();
+            idTmp = tr.getCarrierId();
             carr = getById(carList, idTmp);
             if (carr != null) {
-                transportation.setCarrier(carr);
+                tr.setCarrier(carr);
                 if (carr.getTransportations() == null)
                     carr.setTransportations(new ArrayList<Transportation>());
-                carr.getTransportations().add(transportation);
+                carr.getTransportations().add(tr);
             }
         }
 

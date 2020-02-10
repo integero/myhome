@@ -6,6 +6,7 @@ import ru.epam.homework.common.solutions.utils.CollectionUtils;
 import ru.epam.homework.storage.IdGenerator;
 
 import java.util.*;
+
 import static ru.epam.homework.storage.Storage.cargoCollection;
 
 public class CargoCollectionRepoImpl extends CommonCargoRepo {

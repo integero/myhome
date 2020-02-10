@@ -1,14 +1,15 @@
-package ru.epam.homework.allCaros;
+package ru.epam.homework.common.solutions.dbservice;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class TryConnection implements Cannactable {
-    private static final TryConnection INSTANCE = new TryConnection();
-    public TryConnection() {
+public class GetMyConnection implements DbConnection {
+    private static final GetMyConnection INSTANCE = new GetMyConnection();
+    public GetMyConnection() {
     }
 
-     public static TryConnection getInstance() {
+     public static GetMyConnection getInstance() {
         return INSTANCE;
     }
 

@@ -33,7 +33,11 @@ public class TryToSerielze {
                 objectOutput.writeObject(carList);
             }
             List<Carrier> carriers = readObjectFromFile(file.toFile().getAbsolutePath());
-            System.out.println("Size f List of Carriers: "+ carriers.size());
+            for (Carrier ca: carriers
+                 ) {
+
+                System.out.println("Size f List of Carriers: "+ ca.toString());
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,13 +54,6 @@ public class TryToSerielze {
         }
         System.out.println();
     }
-
-    private static <P> P readObjectFromFile(String file) throws Exception {
-        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file))) {
-            Object o = inputStream.readObject();
-            return (P) o;
-        }
-    }
     public static <H extends MyDefHandler, P>
     List<P> parseAndPrint(String filePath, SAXParser saxParser, H handler) throws IOException, SAXException {
         File file = new File(filePath);
@@ -67,4 +64,11 @@ public class TryToSerielze {
         }
         return list;
     }
+    private static <P> P readObjectFromFile(String file) throws Exception {
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file))) {
+            Object o = inputStream.readObject();
+            return (P) o;
+        }
+    }
+
 }
